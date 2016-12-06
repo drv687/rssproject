@@ -1,0 +1,52 @@
+<html>
+<style media="screen">
+body {
+      text-align: center;
+	   background-size: cover;
+     background-color: antiquewhite;
+      background-position: center;
+      color: black;
+      font-family: arial;
+    }
+    p {
+      font-size: 22px;
+      color: black;
+      font-family: arial;
+    }
+</style>
+<script>
+function RSS(s) {
+  if (s.length===0) { 
+    document.getElementById("rssOutput").innerHTML="";
+    return;
+  }
+  if (window.XMLHttpRequest) {
+    // For modern browsers
+    xmlhttp=new XMLHttpRequest();
+  } else {  // For older browsers.
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  xmlhttp.onreadystatechange=function() {
+    if (this.readyState===4 && this.status===200) {
+      document.getElementById("rssOut").innerHTML=this.responseText;
+    }
+  };
+  xmlhttp.open("GET","rss.php?r="+s,true);
+  xmlhttp.send();
+}
+</script>
+</head>
+<body>
+    <p> Please select an RSS feed of your choice below. </p>
+<form>
+<select onchange="RSS(this.value)">
+<option value="">Choose an RSS feed:</option>
+<option value="Google">Google News</option>
+<option value="NBC">NBC News</option>
+<option value="ABC">ABC News </option>
+<option value="Forest Service">Forest Service News </option>
+</select>
+</form>
+<div id="rssOut">Your selected feed will be shown below</div>
+</body>
+</html>
